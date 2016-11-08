@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CreateAnswersTable' => $baseDir . '/database/migrations/2016_10_18_121659_create_answers_table.php',
     'CreateCountriesTable' => $baseDir . '/database/migrations/2016_10_18_115646_create_countries_table.php',
-    'CreateFrontendsTable' => $baseDir . '/database/migrations/2016_11_08_163904_create_frontends_table.php',
+    'CreateFrontEndsTable' => $baseDir . '/database/migrations/2016_11_08_203133_create_front_ends_table.php',
     'CreateGamesTable' => $baseDir . '/database/migrations/2016_10_18_121055_create_games_table.php',
     'CreateLevelsTable' => $baseDir . '/database/migrations/2016_10_18_120512_create_levels_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

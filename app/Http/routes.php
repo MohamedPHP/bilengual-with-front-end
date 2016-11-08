@@ -25,12 +25,17 @@ Route::get('/about', 'FrontEndController@about');
 * | Back End Routes
 */
 Route::group(['prefix' => 'admin'], function (){
-    Route::get('/dashboard', 'AdminController@dashboard');
     Route::get('/user', 'AdminController@user');
     Route::get('/table', 'AdminController@table');
     Route::get('/typography', 'AdminController@typography');
     Route::get('/notifications', 'AdminController@notifications');
-
+    //Frontend Controlling
+    Route::get('/dashboard', 'AdminController@dashboard');
+    Route::post('/dashboard/create', [
+        'uses' => 'AdminController@create',
+        'as'   => 'frontend.create',
+    ]);
+    //Frontend Controlling
     //levels
     Route::get('/levels', [
         'uses'    =>  'LevelsController@index',

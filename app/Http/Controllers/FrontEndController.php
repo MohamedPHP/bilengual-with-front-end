@@ -30,4 +30,5 @@ class FrontEndController extends Controller
     {
         return view('frontend.about');
     }
+
 }

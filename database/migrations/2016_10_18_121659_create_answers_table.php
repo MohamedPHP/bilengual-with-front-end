@@ -13,9 +13,10 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create('answers', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
             $table->increments('id');
             $table->string('content');
-            $table->boolean('result');
+            $table->integer('result')->default(0);
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
@@ -29,6 +30,7 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
         Schema::drop('answers');
     }
 }

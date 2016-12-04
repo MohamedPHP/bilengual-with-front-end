@@ -13,6 +13,7 @@ class CreateGamesTable extends Migration
     public function up()
     {
         Schema::create('games', function (Blueprint $table) {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
             $table->increments('id');
             $table->string('name');
             $table->integer('quize_id')->unsigned();
@@ -28,6 +29,7 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0'); // to avoid error during migration
         Schema::drop('games');
     }
 }

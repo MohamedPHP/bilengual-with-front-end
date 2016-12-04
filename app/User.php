@@ -6,6 +6,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public function country()
+    {
+        return $this->belongsTo('App\Country');
+    }
+    public function country()
+    {
+        return $this->hasOne('App\Level');
+    }
     /**
      * The attributes that are mass assignable.
      *

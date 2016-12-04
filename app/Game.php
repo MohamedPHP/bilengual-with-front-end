@@ -9,7 +9,7 @@ class Game extends Model
     public function quize(){
         return $this->belongsTo('App\Quize');
     }
-    public function questions(){
-        return $this->hasMany('App\Question');
+    public function rounds(){
+        return $this->hasMany('App\Round');
     }
 }

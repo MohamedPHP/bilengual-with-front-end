@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    public function game(){
+    public function round(){
         return $this->belongsTo('App\Game');
     }
     public function answers(){

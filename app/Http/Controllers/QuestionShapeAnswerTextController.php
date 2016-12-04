@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use App\Question;
 
-use App\Game;
+use App\Round;
 
 class QuestionShapeAnswerTextController extends Controller
 {
@@ -20,8 +20,8 @@ class QuestionShapeAnswerTextController extends Controller
     public function index()
     {
         $questions = Question::where('Questiontype', 6)->get(); // 6 means shape questions with answers text
-        $games = Game::all();
-        return view('backend.quistions.shape-text', ['questions' => $questions, 'games' => $games]);
+        $rounds = Round::all();
+        return view('backend.quistions.shape-text', ['questions' => $questions, 'rounds' => $rounds]);
     }
     public function create(Request $request)
     {
@@ -32,7 +32,7 @@ class QuestionShapeAnswerTextController extends Controller
 
         $question = new Question();
         $question->content      = $this->upload($request['question_shape_answer_text_content']);
-        $question->game_id      = $request['question_shape_answer_text_game'];
+        $question->round_id      = $request['question_shape_answer_text_game'];
         $question->Questiontype = 6;
         $question->save();
 
@@ -59,7 +59,7 @@ class QuestionShapeAnswerTextController extends Controller
             $question->content = $content;
         }
 
-        $question->game_id = $request['question_shape_answer_text_game'];
+        $question->round_id = $request['question_shape_answer_text_game'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Answer Updated SucessFully']);

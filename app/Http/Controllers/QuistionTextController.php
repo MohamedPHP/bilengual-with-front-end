@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Question;
-use App\Game;
+use App\Round;
 
 class QuistionTextController extends Controller
 {
@@ -18,8 +18,8 @@ class QuistionTextController extends Controller
     public function index()
     {
         $questions = Question::where('Questiontype', 0)->get(); // 0 means text questions
-        $games = Game::all();
-        return view('backend.quistions.index', ['questions' => $questions, 'games' => $games]);
+        $rounds = Round::all();
+        return view('backend.quistions.index', ['questions' => $questions, 'rounds' => $rounds]);
     }
 
     public function create(Request $request)
@@ -31,7 +31,7 @@ class QuistionTextController extends Controller
 
         $question = new Question();
         $question->content = $request['question_content'];
-        $question->game_id = $request['question_game_id'];
+        $question->round_id = $request['question_game_id'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Question Added Sucessfully']);
@@ -41,14 +41,14 @@ class QuistionTextController extends Controller
     {
         $question = Question::find($request['qid']);
         $question->content = $request['question_content'];
-        $question->game_id = $request['question_game_id'];
+        $question->round_id = $request['question_game_id'];
         $question->save();
 
 
         return response()->json([
             'question_content'  =>  $question->content,
-            'question_game_id'  =>  $question->game_id,
-            'question_game_name'=>  $question->game->name,
+            'question_game_id'  =>  $question->round_id,
+            'question_game_name'=>  $question->round->name,
         ], 200);
     }
 

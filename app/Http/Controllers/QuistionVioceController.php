@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Question;
-use App\Game;
+use App\Round;
 
 class QuistionVioceController extends Controller
 {
@@ -18,8 +18,8 @@ class QuistionVioceController extends Controller
     public function index()
     {
         $questions = Question::where('Questiontype', 1)->get(); // 1 means voice questions only
-        $games = Game::all();
-        return view('backend.quistions.vioce', ['questions' => $questions, 'games' => $games]);
+        $rounds = Round::all();
+        return view('backend.quistions.vioce', ['questions' => $questions, 'rounds' => $rounds]);
     }
 
     public function create(Request $request)
@@ -30,7 +30,7 @@ class QuistionVioceController extends Controller
         ]);
         $question = new Question();
         $question->content = $this->upload($request['vioce_question_content']);
-        $question->game_id = $request['vioce_question_game'];
+        $question->round_id = $request['vioce_question_game'];
         $question->Questiontype = 1;
         $question->save();
 
@@ -58,7 +58,7 @@ class QuistionVioceController extends Controller
             unlink($public);
         }
         $question->content = $this->upload($request['vioce_question_content']);
-        $question->game_id = $request['vioce_question_game'];
+        $question->round_id = $request['vioce_question_game'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Field Has Been Updated Sucessfully']);

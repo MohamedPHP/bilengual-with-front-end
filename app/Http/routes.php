@@ -81,6 +81,27 @@ Route::group(['prefix' => 'admin'], function (){
 
     // games End
 
+    // rounds Start
+
+    Route::get('/rounds', [
+        'uses' => 'RoundsController@index',
+        'as'   => 'rounds.index'
+    ]);
+    Route::post('/rounds', [
+        'uses'    =>  'RoundsController@create',
+        'as'      =>  'rounds.create'
+    ]);
+    Route::post('/rounds/update', [
+        'uses'    =>  'RoundsController@update',
+        'as'      =>  'rounds.update'
+    ]);
+    Route::get('/rounds/delete/{id}', [
+        'uses'    =>  'RoundsController@delete',
+        'as'      =>  'rounds.delete'
+    ]);
+
+    // rounds End
+
     //quistions text Start
 
     Route::get('/quistions', [

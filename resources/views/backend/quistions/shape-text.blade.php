@@ -55,7 +55,7 @@
                                                     <img class="img-responsive img-rounded" src="{{ asset($q->content) }}" alt="" />
                                                 </div>
                                             </td>
-                                            <td>{{ $q->game->name }}</td>
+                                            <td>{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -89,11 +89,11 @@
                             <input type="file" name="question_shape_answer_text_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                         </div>
                         <div class="form-group">
-                            <label for="">Reffered Game</label>
+                            <label for="">Reffered Round</label>
                             <select class="form-control" name="question_shape_answer_text_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                                 <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -128,8 +128,8 @@
                                 <label for="">question Game</label>
                                 <select id="question_shape_answer_text_game" class="form-control" name="question_shape_answer_text_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                                     <option value="">---------- Select A Game ----------</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                    @foreach ($rounds as $round)
+                                        <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

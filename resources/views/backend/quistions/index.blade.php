@@ -34,7 +34,7 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
@@ -43,7 +43,7 @@
                                         <tr data-qid="{{ $q->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>{{ $q->content }}</td>
-                                            <td data-gameid="{{ $q->game_id }}">{{ $q->game->name }}</td>
+                                            <td data-gameid="{{ $q->round_id }}">{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -83,8 +83,8 @@
                             <label for="Quize">Reffered Game</label>
                             <select class="form-control" name="question_game_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                                 <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -118,8 +118,8 @@
                             <label for="Quize">Quize Level</label>
                             <select id="question_game_id" class="form-control" name="question_game_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                                 <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>

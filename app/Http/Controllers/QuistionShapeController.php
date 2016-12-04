@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Question;
-use App\Game;
+use App\Round;
 
 class QuistionShapeController extends Controller
 {
@@ -18,8 +18,8 @@ class QuistionShapeController extends Controller
     public function index()
     {
         $questions = Question::where('Questiontype', 2)->get(); // 2 means shapes questions
-        $games = Game::all();
-        return view('backend.quistions.shapes', ['questions' => $questions, 'games' => $games]);
+        $rounds = Round::all();
+        return view('backend.quistions.shapes', ['questions' => $questions, 'rounds' => $rounds]);
     }
     public function create(Request $request)
     {
@@ -30,7 +30,7 @@ class QuistionShapeController extends Controller
 
         $question = new Question();
         $question->content      = $this->upload($request['shape_question_content']);
-        $question->game_id      = $request['shape_question_game'];
+        $question->round_id      = $request['shape_question_game'];
         $question->Questiontype = 2;
         $question->save();
 
@@ -61,7 +61,7 @@ class QuistionShapeController extends Controller
             $content = $question->content;
             $question->content = $content;
         }
-        $question->game_id = $request['shape_question_game'];
+        $question->round_id = $request['shape_question_game'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'the question updated successfully']);

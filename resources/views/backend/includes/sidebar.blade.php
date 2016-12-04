@@ -37,6 +37,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{url('/admin/rounds')}}">
+                    <i class="ti-hand-drag"></i>
+                    <p>rounds</p>
+                </a>
+            </li>
+            <li>
                 <a href="{{url('/admin/quistions')}}">
                     <i class="ti-hand-drag"></i>
                     <p>Quistions Text</p>

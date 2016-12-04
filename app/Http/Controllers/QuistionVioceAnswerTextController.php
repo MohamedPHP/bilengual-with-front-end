@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use App\Question;
 
-use App\Game;
+use App\Round;
 
 class QuistionVioceAnswerTextController extends Controller
 {
@@ -20,8 +20,8 @@ class QuistionVioceAnswerTextController extends Controller
     public function index()
     {
         $questions = Question::where('Questiontype', 3)->get(); // 3 means voice questions with answers text
-        $games = Game::all();
-        return view('backend.quistions.vioce-text', ['questions' => $questions, 'games' => $games]);
+        $rounds = Round::all();
+        return view('backend.quistions.vioce-text', ['questions' => $questions, 'rounds' => $rounds]);
     }
 
     public function create(Request $request)
@@ -33,7 +33,7 @@ class QuistionVioceAnswerTextController extends Controller
 
         $question_text_answer_voice = new Question();
         $question_text_answer_voice->content = $this->upload($request['text_question_answer_text_content']);
-        $question_text_answer_voice->game_id = $request['text_question_answer_text_game'];
+        $question_text_answer_voice->round_id = $request['text_question_answer_text_game'];
         $question_text_answer_voice->Questiontype = 3;
         $question_text_answer_voice->save();
 
@@ -65,7 +65,7 @@ class QuistionVioceAnswerTextController extends Controller
             $content = $question_text_answer_voice->content;
             $question_text_answer_voice->content = $content;
         }
-        $question_text_answer_voice->game_id = $request['text_question_answer_text_game_id_update'];
+        $question_text_answer_voice->round_id = $request['text_question_answer_text_game_id_update'];
         $question_text_answer_voice->save();
 
         return redirect()->back()->with(['message' => 'The Question Vioce For answer Text Has Been Updated Sucessfully']);

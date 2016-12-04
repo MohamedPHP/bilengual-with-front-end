@@ -8,11 +8,11 @@ class Round extends Model
 {
     public function game()
     {
-        return $this->belongsTo('App\Game')
+        return $this->belongsTo('App\Game');
     }
 
     public function questions()
     {
-        return $this->hasMany('App\Question')
+        return $this->hasMany('App\Question');
     }
 }

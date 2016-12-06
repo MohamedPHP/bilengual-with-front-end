@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2016 at 06:53 PM
+-- Generation Time: Dec 06, 2016 at 03:09 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bilengual`
 --
+CREATE DATABASE IF NOT EXISTS `bilengual` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bilengual`;
 
 -- --------------------------------------------------------
 
@@ -31,8 +33,8 @@ CREATE TABLE `answers` (
   `content` varchar(255) NOT NULL,
   `result` int(11) NOT NULL DEFAULT '0',
   `question_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -44,8 +46,8 @@ CREATE TABLE `answers` (
 CREATE TABLE `countries` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -58,8 +60,8 @@ CREATE TABLE `games` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `quize_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -72,8 +74,8 @@ CREATE TABLE `levels` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `number` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -99,7 +101,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2016_10_18_120841_create_quizes_table', 1),
 ('2016_10_18_121055_create_games_table', 1),
 ('2016_10_18_121454_create_questions_table', 1),
-('2016_10_18_121659_create_answers_table', 1);
+('2016_10_18_121659_create_answers_table', 1),
+('2016_12_04_134759_create_rounds_table', 1);
 
 -- --------------------------------------------------------
 
@@ -110,7 +113,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -122,10 +125,10 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `questions` (
   `id` int(10) UNSIGNED NOT NULL,
   `content` text NOT NULL,
-  `game_id` int(10) UNSIGNED NOT NULL,
   `Questiontype` int(11) NOT NULL DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `round_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -138,8 +141,22 @@ CREATE TABLE `quizes` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `level_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rounds`
+--
+
+CREATE TABLE `rounds` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `game_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -155,8 +172,8 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -164,7 +181,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `phone_number`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'mohamed', 'mohamedzayed709@yahoo.com', '$2y$10$ELXHSLYvcvqdBn9KF3Lcje6umEwp2Ip2ywvTEVEGDeLG667QwMzo2', '', 'Bl5t2BhBHCGKW8tOsK4FqjiUUOQAs251FAv15aCDyCHijYv2iGd8jGlNp5Vu', '2016-10-24 11:02:05', '2016-10-24 17:07:46');
+(1, 'mohamedphp', 'mohamedzayed709@yahoo.com', '$2y$10$VWq9A02.M0K3QRXTH7nqNePqN32vY2HB5fX2Beu2xbEUcUD7FJmey', '01127946754', NULL, '2016-12-06 14:08:15', '2016-12-06 14:08:15');
 
 --
 -- Indexes for dumped tables
@@ -209,7 +226,7 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `questions_game_id_foreign` (`game_id`);
+  ADD KEY `questions_round_id_foreign` (`round_id`);
 
 --
 -- Indexes for table `quizes`
@@ -217,6 +234,13 @@ ALTER TABLE `questions`
 ALTER TABLE `quizes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `quizes_level_id_foreign` (`level_id`);
+
+--
+-- Indexes for table `rounds`
+--
+ALTER TABLE `rounds`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rounds_game_id_foreign` (`game_id`);
 
 --
 -- Indexes for table `users`
@@ -260,6 +284,11 @@ ALTER TABLE `questions`
 ALTER TABLE `quizes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `rounds`
+--
+ALTER TABLE `rounds`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -284,13 +313,19 @@ ALTER TABLE `games`
 -- Constraints for table `questions`
 --
 ALTER TABLE `questions`
-  ADD CONSTRAINT `questions_game_id_foreign` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `questions_round_id_foreign` FOREIGN KEY (`round_id`) REFERENCES `rounds` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `quizes`
 --
 ALTER TABLE `quizes`
   ADD CONSTRAINT `quizes_level_id_foreign` FOREIGN KEY (`level_id`) REFERENCES `levels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rounds`
+--
+ALTER TABLE `rounds`
+  ADD CONSTRAINT `rounds_game_id_foreign` FOREIGN KEY (`game_id`) REFERENCES `games` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

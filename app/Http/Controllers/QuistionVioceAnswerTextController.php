@@ -28,12 +28,12 @@ class QuistionVioceAnswerTextController extends Controller
     {
         $this->validate($request, [
             'text_question_answer_text_content' => 'required',
-            'text_question_answer_text_game'    => 'required',
+            'text_question_answer_text_round'    => 'required',
         ]);
 
         $question_text_answer_voice = new Question();
         $question_text_answer_voice->content = $this->upload($request['text_question_answer_text_content']);
-        $question_text_answer_voice->round_id = $request['text_question_answer_text_game'];
+        $question_text_answer_voice->round_id = $request['text_question_answer_text_round'];
         $question_text_answer_voice->Questiontype = 3;
         $question_text_answer_voice->save();
 
@@ -45,16 +45,16 @@ class QuistionVioceAnswerTextController extends Controller
         $extension = $file->getClientOriginalExtension();
         $sha1 = sha1($file->getClientOriginalName());
         $filename = date('Y-m-d-h-i-s')."_".$sha1.".".$extension;
-        $path = public_path('questions/text-vioce');
+        $path = public_path('questions/voices');
         $file->move($path, $filename);
-        return 'questions/text-vioce/'.$filename;
+        return 'questions/voices/'.$filename;
     }
 
 
     public function update(Request $request)
     {
         $this->validate($request, [
-            'text_question_answer_text_game_id_update'    => 'required',
+            'text_question_answer_text_round_id_update'    => 'required',
         ]);
 
         $question_text_answer_voice = Question::find($request['id']);
@@ -65,7 +65,7 @@ class QuistionVioceAnswerTextController extends Controller
             $content = $question_text_answer_voice->content;
             $question_text_answer_voice->content = $content;
         }
-        $question_text_answer_voice->round_id = $request['text_question_answer_text_game_id_update'];
+        $question_text_answer_voice->round_id = $request['text_question_answer_text_round_id_update'];
         $question_text_answer_voice->save();
 
         return redirect()->back()->with(['message' => 'The Question Vioce For answer Text Has Been Updated Sucessfully']);

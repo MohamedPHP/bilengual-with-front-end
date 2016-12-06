@@ -28,12 +28,12 @@ class QuestionsTextAnswersVioceController extends Controller
     {
         $this->validate($request, [
             'questions_text_answers_voice_content'  => 'required',
-            'questions_text_answers_voice_game'     => 'required',
+            'questions_text_answers_voice_round'     => 'required',
         ]);
 
         $question = new Question();
         $question->content      = $request['questions_text_answers_voice_content'];
-        $question->round_id      = $request['questions_text_answers_voice_game'];
+        $question->round_id      = $request['questions_text_answers_voice_round'];
         $question->Questiontype = 4;
         $question->save();
 
@@ -45,7 +45,7 @@ class QuestionsTextAnswersVioceController extends Controller
         $question = Question::find($request['id']);
 
         $question->content = $request['questions_text_answers_voice_content_update'];
-        $question->round_id = $request['questions_text_answers_voice_game_update'];
+        $question->round_id = $request['questions_text_answers_voice_round_update'];
 
         $question->save();
 

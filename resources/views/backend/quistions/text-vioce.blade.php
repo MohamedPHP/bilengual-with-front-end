@@ -34,16 +34,16 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($questions as $q)
-                                        <tr data-qid="{{ $q->id }}" data-qcontent="{{ $q->content }}" data-gameid="{{ $q->game->id }}">
+                                        <tr data-qid="{{ $q->id }}" data-qcontent="{{ $q->content }}" data-roundid="{{ $q->round->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>{{ $q->content }}</td>
-                                            <td>{{ $q->game->name }}</td>
+                                            <td>{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -77,11 +77,11 @@
                             <input type="text" name="questions_text_answers_voice_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Reffered Game</label>
-                            <select class="form-control" name="questions_text_answers_voice_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                            <label for="Quize">Reffered Round</label>
+                            <select class="form-control" name="questions_text_answers_voice_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -113,11 +113,11 @@
                                 <input id="questions_text_answers_voice_content_update" type="text" name="questions_text_answers_voice_content_update" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                             </div>
                             <div class="form-group">
-                                <label for="">question Game</label>
-                                <select id="questions_text_answers_voice_game_update" class="form-control" name="questions_text_answers_voice_game_update" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                    <option value="">---------- Select A Game ----------</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                <label for="">question Round</label>
+                                <select id="questions_text_answers_voice_round_update" class="form-control" name="questions_text_answers_voice_round_update" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                    <option value="">---------- Select A Round ----------</option>
+                                    @foreach ($rounds as $round)
+                                        <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -147,12 +147,12 @@
 
             var id                 = event.target.parentNode.parentNode.dataset['qid'];
             var questions_content  = event.target.parentNode.parentNode.dataset['qcontent'];
-            var questions_game     = event.target.parentNode.parentNode.dataset['gameid'];
+            var questions_round    = event.target.parentNode.parentNode.dataset['roundid'];
 
 
             $('#id').val(id);
             $('#questions_text_answers_voice_content_update').val(questions_content);
-            $('#questions_text_answers_voice_game_update').val(questions_game);
+            $('#questions_text_answers_voice_round_update').val(questions_round);
             $('#Edit_Question_Modal').modal(); // open the modal
         });
 

@@ -27,12 +27,12 @@ class QuestionShapeAnswerTextController extends Controller
     {
         $this->validate($request, [
             'question_shape_answer_text_content'  => 'required',
-            'question_shape_answer_text_game'     => 'required',
+            'question_shape_answer_text_round'     => 'required',
         ]);
 
         $question = new Question();
         $question->content      = $this->upload($request['question_shape_answer_text_content']);
-        $question->round_id      = $request['question_shape_answer_text_game'];
+        $question->round_id      = $request['question_shape_answer_text_round'];
         $question->Questiontype = 6;
         $question->save();
 
@@ -59,7 +59,7 @@ class QuestionShapeAnswerTextController extends Controller
             $question->content = $content;
         }
 
-        $question->round_id = $request['question_shape_answer_text_game'];
+        $question->round_id = $request['question_shape_answer_text_round'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Answer Updated SucessFully']);

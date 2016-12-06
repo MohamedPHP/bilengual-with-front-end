@@ -26,11 +26,11 @@ class QuistionVioceController extends Controller
     {
         $this->validate($request, [
             'vioce_question_content' => 'required',
-            'vioce_question_game'   => 'required'
+            'vioce_question_round'   => 'required'
         ]);
         $question = new Question();
         $question->content = $this->upload($request['vioce_question_content']);
-        $question->round_id = $request['vioce_question_game'];
+        $question->round_id = $request['vioce_question_round'];
         $question->Questiontype = 1;
         $question->save();
 
@@ -49,7 +49,7 @@ class QuistionVioceController extends Controller
     {
         $this->validate($request, [
             'vioce_question_content'    => 'required',
-            'vioce_question_game'       => 'required',
+            'vioce_question_round'       => 'required',
         ]);
 
         $question = Question::find($request['voice_id']);
@@ -58,7 +58,7 @@ class QuistionVioceController extends Controller
             unlink($public);
         }
         $question->content = $this->upload($request['vioce_question_content']);
-        $question->round_id = $request['vioce_question_game'];
+        $question->round_id = $request['vioce_question_round'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Field Has Been Updated Sucessfully']);

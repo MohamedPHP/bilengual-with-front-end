@@ -25,12 +25,12 @@ class QuistionShapeController extends Controller
     {
         $this->validate($request, [
             'shape_question_content'  =>  'image|required',
-            'shape_question_game'     =>  'required',
+            'shape_question_round'     =>  'required',
         ]);
 
         $question = new Question();
         $question->content      = $this->upload($request['shape_question_content']);
-        $question->round_id      = $request['shape_question_game'];
+        $question->round_id      = $request['shape_question_round'];
         $question->Questiontype = 2;
         $question->save();
 
@@ -50,7 +50,7 @@ class QuistionShapeController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-            'shape_question_game'     =>  'required',
+            'shape_question_round'     =>  'required',
         ]);
         $question = Question::find($request['id']);
         if (!empty($request['shape_question_content'])) {
@@ -61,7 +61,7 @@ class QuistionShapeController extends Controller
             $content = $question->content;
             $question->content = $content;
         }
-        $question->round_id = $request['shape_question_game'];
+        $question->round_id = $request['shape_question_round'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'the question updated successfully']);

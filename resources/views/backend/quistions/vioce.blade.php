@@ -34,7 +34,7 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
@@ -48,7 +48,7 @@
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </td>
-                                            <td data-gameid="{{ $q->game_id }}">{{ $q->game->name }}</td>
+                                            <td data-roundid="{{ $q->round->id }}">{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -78,15 +78,15 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="Quize">Question Content</label>
+                            <label for="">Question Content</label>
                             <input type="file" name="vioce_question_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Reffered Game</label>
-                            <select class="form-control" name="vioce_question_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                            <label for="Quize">Reffered Round</label>
+                            <select class="form-control" name="vioce_question_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -107,7 +107,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Game</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Round</h4>
                 </div>
                 <form action="{{ route('quistions.vioce.update') }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -118,11 +118,11 @@
                                 <input id="vioce_question_content" type="file" name="vioce_question_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                             </div>
                             <div class="form-group">
-                                <label for="">question Game</label>
-                                <select id="vioce_question_game" class="form-control" name="vioce_question_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                    <option value="">---------- Select A Game ----------</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                <label for="">question Round</label>
+                                <select id="vioce_question_round" class="form-control" name="vioce_question_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                    <option value="">---------- Select A Round ----------</option>
+                                    @foreach ($rounds as $round)
+                                        <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -148,21 +148,21 @@
         });
 
         var qid = null;
-        var gameidElement = null;
+        var roundidElement = null;
 
 
         $('.edit').click(function (event) {
             event.preventDefault();
 
             // set vars to get the text content of the selected element
-            gameidElement = event.target.parentNode.parentNode.childNodes[5];
+            roundidElement = event.target.parentNode.parentNode.childNodes[5];
 
             // set vars to get the text content of the selected element
-            var question_game = gameidElement.dataset['gameid'];
+            var question_round = roundidElement.dataset['roundid'];
             qid = event.target.parentNode.parentNode.dataset['qid'];
 
             // Put The Data In The Edit field
-            $('#vioce_question_game').val(question_game);
+            $('#vioce_question_round').val(question_round);
             $('#voice_id').val(qid);
 
             // Done

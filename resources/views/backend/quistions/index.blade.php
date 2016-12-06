@@ -43,7 +43,7 @@
                                         <tr data-qid="{{ $q->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>{{ $q->content }}</td>
-                                            <td data-gameid="{{ $q->round_id }}">{{ $q->round->name }}</td>
+                                            <td data-roundid="{{ $q->round_id }}">{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -77,12 +77,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="Quize">Question Content</label>
-                            <textarea name="question_content" class="form-control" rows="8" cols="40" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;"></textarea>
+                            <textarea name="question_content" class="form-control" rows="5" cols="40" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Reffered Game</label>
-                            <select class="form-control" name="question_game_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
+                            <label for="Quize">Reffered Round</label>
+                            <select class="form-control" name="question_round_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
                                 @foreach ($rounds as $round)
                                     <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
@@ -105,19 +105,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Game</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Edit Round</h4>
                 </div>
                 <form action="#" method="post">
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="Quize">Question Content</label>
-                            <textarea id="question_content" name="question_content" rows="8" class="form-control" cols="40" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;"></textarea>
+                            <textarea id="question_content" name="question_content" rows="5" class="form-control" cols="40" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Quize Level</label>
-                            <select id="question_game_id" class="form-control" name="question_game_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
+                            <label for="Quize">Round</label>
+                            <select id="question_round_id" class="form-control" name="question_round_id" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
                                 @foreach ($rounds as $round)
                                     <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
@@ -146,23 +146,23 @@
 
         var qid = null;
         var contentElement = null;
-        var gameidElement = null;
+        var roundidElement = null;
 
         $('.edit').click(function (event) {
             event.preventDefault();
 
             // set vars to get the text content of the selected element
             contentElement = event.target.parentNode.parentNode.childNodes[3];
-            gameidElement = event.target.parentNode.parentNode.childNodes[5];
+            roundidElement = event.target.parentNode.parentNode.childNodes[5];
 
             // set vars to get the text content of the selected element
             var question_content = contentElement.textContent.trim();
-            var question_game = gameidElement.dataset['gameid'];
+            var question_round = roundidElement.dataset['roundid'];
             qid = event.target.parentNode.parentNode.dataset['qid'];
 
             // Put The Data In The Edit field
             $('#question_content').val(question_content);
-            $('#question_game_id').val(question_game);
+            $('#question_round_id').val(question_round);
 
 
 
@@ -178,14 +178,14 @@
                 url: url,
                 data: {
                     question_content : $('#question_content').val(),
-                    question_game_id : $('#question_game_id').val(),
+                    question_round_id : $('#question_round_id').val(),
                     qid : qid,
                     _token : token,
                 },
             }).done(function (msg) {
                 $(contentElement).text(msg['question_content']);
-                $(gameidElement).text(msg['question_game_name']);
-                $(gameidElement).attr("data-gameid", msg['question_game_id']);
+                $(roundidElement).text(msg['question_round_name']);
+                $(roundidElement).attr("data-roundid", msg['question_round_id']);
                 $('#Edit_Question_Modal').modal('hide');
             })
         });

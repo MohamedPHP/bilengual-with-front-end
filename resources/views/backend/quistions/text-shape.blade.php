@@ -34,16 +34,16 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($questions as $q)
-                                        <tr data-qid="{{ $q->id }}" data-qcontent="{{ $q->content }}" data-qgameid="{{ $q->game->id }}">
+                                        <tr data-qid="{{ $q->id }}" data-qcontent="{{ $q->content }}" data-qroundid="{{ $q->round->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>{{ $q->content }}</td>
-                                            <td>{{ $q->game->name }}</td>
+                                            <td>{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -61,7 +61,7 @@
     </div>
 
 
-    <!-- Start Add New Quize -->
+    <!-- Start Add New Question -->
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="Add_Vioce_Question_Modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -77,11 +77,11 @@
                             <input type="text" name="questions_text_answers_shape_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Reffered Game</label>
-                            <select class="form-control" name="questions_text_answers_shape_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                            <label for="Quize">Reffered Round</label>
+                            <select class="form-control" name="questions_text_answers_shape_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -94,7 +94,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <!-- End Add New Quize -->
+    <!-- End Add New question -->
 
     <!--Edit Modal-->
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="Edit_Question_Modal">
@@ -113,11 +113,11 @@
                                 <input id="questions_text_answers_shape_content" type="text" name="questions_text_answers_shape_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                             </div>
                             <div class="form-group">
-                                <label for="">question Game</label>
-                                <select id="questions_text_answers_shape_game" name="questions_text_answers_shape_game" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                    <option value="">---------- Select A Game ----------</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                <label for="">Question Round</label>
+                                <select id="questions_text_answers_shape_round" name="questions_text_answers_shape_round" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                    <option value="">---------- Select A Round ----------</option>
+                                    @foreach ($rounds as $round)
+                                        <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -147,18 +147,18 @@
             //
             // qid
             // qcontent
-            // qgameid
+            // qroundid
             // questions_text_answers_shape_content
-            // questions_text_answers_shape_game
+            // questions_text_answers_shape_round
             //
 
             var qid          = event.target.parentNode.parentNode.dataset['qid'];
             var qcontent     = event.target.parentNode.parentNode.dataset['qcontent'];
-            var qgameid      = event.target.parentNode.parentNode.dataset['qgameid'];
+            var qroundid      = event.target.parentNode.parentNode.dataset['qroundid'];
 
             $('#id').val(qid);
             $('#questions_text_answers_shape_content').val(qcontent);
-            $('#questions_text_answers_shape_game').val(qgameid);
+            $('#questions_text_answers_shape_round').val(qroundid);
 
             $('#Edit_Question_Modal').modal(); // open the modal
         });

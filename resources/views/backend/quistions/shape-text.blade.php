@@ -42,13 +42,13 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($questions as $q)
-                                        <tr data-questionid="{{ $q->id }}" data-gameid="{{ $q->game->id }}">
+                                        <tr data-questionid="{{ $q->id }}" data-roundid="{{ $q->round->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>
                                                 <div class="img-container">
@@ -90,8 +90,8 @@
                         </div>
                         <div class="form-group">
                             <label for="">Reffered Round</label>
-                            <select class="form-control" name="question_shape_answer_text_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
+                            <select class="form-control" name="question_shape_answer_text_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
                                 @foreach ($rounds as $round)
                                     <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
@@ -125,9 +125,9 @@
                                 <input id="question_shape_answer_text_content" type="file" name="question_shape_answer_text_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                             </div>
                             <div class="form-group">
-                                <label for="">question Game</label>
-                                <select id="question_shape_answer_text_game" class="form-control" name="question_shape_answer_text_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                    <option value="">---------- Select A Game ----------</option>
+                                <label for="">question Round</label>
+                                <select id="question_shape_answer_text_round" class="form-control" name="question_shape_answer_text_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                    <option value="">---------- Select A Round ----------</option>
                                     @foreach ($rounds as $round)
                                         <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
@@ -157,12 +157,12 @@
         $('.edit').click(function (event) {
             event.preventDefault();
             // qid
-            // gameid
+            // roundid
             var id = event.target.parentNode.parentNode.dataset['questionid'];
-            var gameid = event.target.parentNode.parentNode.dataset['gameid'];
+            var roundid = event.target.parentNode.parentNode.dataset['roundid'];
 
             $('#id').val(id);
-            $('#question_shape_answer_text_game').val(gameid);
+            $('#question_shape_answer_text_round').val(roundid);
 
             $('#Edit_Question_Modal').modal(); // open the modal
         });

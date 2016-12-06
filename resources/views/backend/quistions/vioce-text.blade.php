@@ -34,13 +34,13 @@
                                 <thead>
                                     <th>ID</th>
                                 	<th>Content</th>
-                                	<th>Reffered Game</th>
+                                	<th>Reffered Round</th>
                                 	<th>Created At</th>
                                 	<th>Actions</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($questions as $q)
-                                        <tr data-qid="{{ $q->id }}" data-gameid="{{ $q->game_id }}">
+                                        <tr data-qid="{{ $q->id }}" data-roundid="{{ $q->round->id }}">
                                             <td>{{ $q->id }}</td>
                                             <td>
                                                 <audio controls>
@@ -48,7 +48,7 @@
                                                     Your browser does not support the audio element.
                                                 </audio>
                                             </td>
-                                            <td>{{ $q->game->name }}</td>
+                                            <td>{{ $q->round->name }}</td>
                                             <td>{{ $q->created_at }}</td>
                                             <td>
                                                 <a href="#" class="btn btn-success edit">Edit</a>
@@ -82,18 +82,18 @@
                             <input type="file" name="text_question_answer_text_content" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                         </div>
                         <div class="form-group">
-                            <label for="Quize">Reffered Game</label>
-                            <select class="form-control" name="text_question_answer_text_game" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                <option value="">---------- Select A Game ----------</option>
-                                @foreach ($games as $game)
-                                    <option value="{{ $game->id }}">{{ $game->name }}</option>
+                            <label for="Quize">Reffered Round</label>
+                            <select class="form-control" name="text_question_answer_text_round" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                <option value="">---------- Select A Round ----------</option>
+                                @foreach ($rounds as $round)
+                                    <option value="{{ $round->id }}">{{ $round->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -118,11 +118,11 @@
                                 <input id="text_question_answer_text_content_update" type="file" name="text_question_answer_text_content_update" class="form-control" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
                             </div>
                             <div class="form-group">
-                                <label for="">question Game</label>
-                                <select id="text_question_answer_text_game_id_update" class="form-control" name="text_question_answer_text_game_id_update" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
-                                    <option value="">---------- Select A Game ----------</option>
-                                    @foreach ($games as $game)
-                                        <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                <label for="">question Round</label>
+                                <select id="text_question_answer_text_round_id_update" class="form-control" name="text_question_answer_text_round_id_update" style="background-color:#fff; box-shadow: 3px 3px 10px #ccc;">
+                                    <option value="">---------- Select A Round ----------</option>
+                                    @foreach ($rounds as $round)
+                                        <option value="{{ $round->id }}">{{ $round->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -151,10 +151,10 @@
             event.preventDefault();
 
             var id = event.target.parentNode.parentNode.dataset['qid'];
-            var text_question_answer_text_game_id_update = event.target.parentNode.parentNode.dataset['gameid'];
+            var text_question_answer_text_round_id_update = event.target.parentNode.parentNode.dataset['roundid'];
 
             $('#id').val(id);
-            $('#text_question_answer_text_game_id_update').val(text_question_answer_text_game_id_update);
+            $('#text_question_answer_text_round_id_update').val(text_question_answer_text_round_id_update);
 
             $('#Edit_Question_Modal').modal(); // open the modal
         });

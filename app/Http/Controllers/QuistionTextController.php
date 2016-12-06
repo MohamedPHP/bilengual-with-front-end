@@ -26,12 +26,12 @@ class QuistionTextController extends Controller
     {
         $this->validate($request, [
             'question_content'  =>  'required',
-            'question_game_id'  =>  'required'
+            'question_round_id'  =>  'required'
         ]);
 
         $question = new Question();
         $question->content = $request['question_content'];
-        $question->round_id = $request['question_game_id'];
+        $question->round_id = $request['question_round_id'];
         $question->save();
 
         return redirect()->back()->with(['message' => 'The Question Added Sucessfully']);
@@ -41,14 +41,14 @@ class QuistionTextController extends Controller
     {
         $question = Question::find($request['qid']);
         $question->content = $request['question_content'];
-        $question->round_id = $request['question_game_id'];
+        $question->round_id = $request['question_round_id'];
         $question->save();
 
 
         return response()->json([
             'question_content'  =>  $question->content,
-            'question_game_id'  =>  $question->round_id,
-            'question_game_name'=>  $question->round->name,
+            'question_round_id'  =>  $question->round_id,
+            'question_round_name'=>  $question->round->name,
         ], 200);
     }
 

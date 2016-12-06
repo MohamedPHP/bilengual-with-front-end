@@ -18,7 +18,8 @@ class CreateQuizesTable extends Migration
             $table->string('name');
             $table->integer('level_id')->unsigned();
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

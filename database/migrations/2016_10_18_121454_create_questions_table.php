@@ -19,7 +19,8 @@ class CreateQuestionsTable extends Migration
             $table->integer('Questiontype')->default(0);
             $table->integer('round_id')->unsigned();
             $table->foreign('round_id')->references('id')->on('rounds')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 
